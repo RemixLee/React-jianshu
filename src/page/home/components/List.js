@@ -1,36 +1,48 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { 
+import { actionCreators } from '../store';
+import { Link } from 'react-router-dom';
+import {
     ListItem,
-    ListInfo
+    ListInfo,
+    LoadMore
 } from '../style';
 
-class List extends Component {
+class List extends PureComponent {
     render() {
-        const { list } = this.props;
+        const { list, getMoreList, page } = this.props;
         return (
             <div>
                 {
-                    list.map((item) => {
+                    list.map((item, index) => {
                         return (
-                            <ListItem key={item.get('id')}>
-                                <img alt='' className="list-pic" src={item.get('imgUrl')}/>
-                                <ListInfo>
-                                    <h3 className="title">{item.get('title')}</h3>
-                                        <p className="desc">{item.get('desc')}</p>
-                                </ListInfo>
-                            </ListItem>
+                            <Link key={index} to={'/detail/' + item.get('id')}>
+                                <ListItem>
+                                    <img alt='' className="list-pic" src={item.get('imgUrl')}/>
+                                    <ListInfo>
+                                        <h3 className="title">{item.get('title')}</h3>
+                                            <p className="desc">{item.get('desc')}</p>
+                                    </ListInfo>
+                                </ListItem>
+                            </Link>
                         )
                     })
                 }
-            </div>
-            
+                <LoadMore onClick={() => getMoreList(page)}>阅读更多</LoadMore>
+            </div>          
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    list: state.getIn(['home', 'articleList'])
+    list: state.getIn(['home', 'articleList']),
+    page: state.getIn(['home', 'articlePage'])
 });
 
-export default connect(mapStateToProps, null)(List);
+const mapDispatchToProps = (dispatch) => ({
+    getMoreList(page) {
+        dispatch(actionCreators.getMoreList(page))
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(List);

@@ -2,15 +2,14 @@ import styled from 'styled-components';
 import LogoPic from '../../static/logo.png';
 
 export const HeaderWrapper = styled.div`
+    z-index: 1;
     height: 56px;
     border-bottom: 1px solid #f0f0f0;
     border-radius: 2px;
     position: relative;
 `;
 
-export const Logo = styled.a.attrs({
-    href: '/'
-})`
+export const Logo = styled.div`
     height: 56px;
     width: 100px;
     display: block;
@@ -34,6 +33,7 @@ export const NavItem = styled.div`
     padding: 0 20px;
     font-size: 18px;
     color: #333;
+    cursor: pointer;
     &.left {
         float: left;
     }

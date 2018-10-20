@@ -39,3 +39,12 @@ export const getList = () => {
         })
     }
 }
+
+//export const etListMore = () => {
+//    return (dispatch) => {
+//        axios.get('/api/homeList.json').then((res) => {
+//            const result = res.data.data;
+//            dispatch(addHomeList)
+//        })
+//    }
+//}

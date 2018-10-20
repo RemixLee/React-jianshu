@@ -1,11 +1,34 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { DetailWrapper, Header,Content } from './style';
+import { actionCreators } from './store';
 
-class Detail extends Component {
+class Detail extends PureComponent {
     render() {
         return (
-            <div>Detail</div>
+            <DetailWrapper>
+                <Header>{this.props.title}</Header>
+                <Content dangerouslySetInnerHTML={{__html: this.props.content}}/>
+            </DetailWrapper>
         )
+    }
+    componentDidMount() {
+        this.props.getDetail(this.props.match.params.id);
     }
 }
 
-export default Detail;
+const mapStateToProps = (state) => ({
+    title: state.getIn(['detail', 'title']),
+    content: state.getIn(['detail', 'content'])
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    getDetail(id) {
+        dispatch(actionCreators.getDetail(id));
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Detail));
+
+//withRouter 方法是让当前组件可以获取到Router里面的所有参数和内容

@@ -10,6 +10,7 @@ export const HomeLeft = styled.div`
     margin-top: 30px;
     margin-left: 15px;
     width: 625px;
+    overfflow: hidden;
     .banner-img {
         width: 625px;
         height: 270px;
@@ -98,4 +99,30 @@ export const WriterWrapper = styled.div`
     height: 300px;
     line-height: 300px;
     text-align: center;
+`;
+
+export const LoadMore = styled.div`
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #a5a5a5;
+    text-align: center;
+    border-radius: 20px;
+    margin: 30px 0;
+    color: #fff;
+    cursor: pointer;
+`;
+
+export const BackTop = styled.div`
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    text-weight: 700;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    border-radius: 15px;
 `;
